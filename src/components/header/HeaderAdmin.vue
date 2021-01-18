@@ -1,0 +1,188 @@
+<template>
+  <div>
+    <header>
+      <div class="navbar-fixed" style="height: 95px">
+        <nav class="navbar blue darken-1" style="height: 95px">
+          <div class="nav-wrapper">
+            <div class="brand-logo">
+              <img
+                class="logo-min header-logo"
+                src="../../assets/hotel.png"
+                alt=""
+              />
+            </div>
+            <a
+              data-target="slide-out"
+              class="sidenav-trigger left"
+              v-bind:class="{ 'button-collapse': sidebar }"
+              v-on:click="collapse()"
+            >
+              <i class="material-icons white-text">menu</i>
+            </a>
+          </div>
+        </nav>
+      </div>
+      <ul
+        class="sidenav sidenav-fixed"
+        v-bind:class="{ 'sidenav-collapse': sidebar }"
+        id="slide-out"
+      >
+        <li>
+          <div class="logo-container" style="padding:20px">
+            <img src="../../assets/logo.png" class="logo-sidebar" />
+          </div>
+        </li>
+        <li>
+          <ul class="collapsible collapsible-accordion top-m">
+            <li class="waves-effect">
+              <h5 class="black-text name center">Menú</h5>
+            </li>
+            <li class="waves-effect">
+              <router-link to="/" class="collapsible-header" tabindex="0">
+                Inicio<i class="material-icons">home</i>
+              </router-link>
+            </li>
+            <li class="waves-effect">
+              <router-link
+                to="/hotel-admin"
+                class="collapsible-header"
+                tabindex="0"
+                >Hoteles
+                  <i class="material-icons">hotel</i>
+              </router-link>
+            </li>
+            <li class="waves-effect">
+              <router-link
+                to="/room-type-admin"
+                class="collapsible-header"
+                tabindex="0"
+              >Tipo de habitaciones
+              <i class="material-icons">filter_list</i>
+              </router-link>
+            </li>
+            <li class="waves-effect">
+              <router-link
+                to="/room-admin"
+                class="collapsible-header"
+                tabindex="0"
+              >Habitaciones
+              <i class="material-icons">weekend</i>
+              </router-link>
+            </li>
+            <li class="waves-effect">
+              <router-link
+                to="/guest-admin"
+                class="collapsible-header"
+                tabindex="0"
+              >Huéspedes
+              <i class="material-icons">people</i>
+              </router-link>
+            </li>
+            <li class="waves-effect">
+              <router-link
+                to="/reservation-admin"
+                class="collapsible-header"
+                tabindex="0"
+              >Reservaciones<i class="material-icons">description</i>
+              </router-link>
+            </li>
+            <li class="waves-effect">
+              <router-link
+                to="/logout"
+                class="collapsible-header"
+                tabindex="0"
+              >Cerrar sesión
+              <i class="material-icons">logout</i>
+              </router-link>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Header",
+  data() {
+    return {
+      sidebar: false,
+    };
+  },
+  methods: {
+    collapse() {
+      this.sidebar = !this.sidebar;
+    },
+  }
+};
+</script>
+
+<style scoped>
+.sidenav .logo-container {
+  padding: 0 16px;
+  height: 94px;
+  line-height: 64px;
+  font-size: 24px;
+  box-sizing: content-box;
+}
+
+.sidenav .collapsible > li.waves-effect {
+  display: block;
+}
+
+.sidenav .collapsible li,
+.sidenav.fixed .collapsible li {
+  padding: 0;
+}
+
+.logo-min {
+  width: 195px;
+  height: 85px;
+  margin-top: 6px;
+}
+
+.cintillo-min {
+  width: 100%;
+  height: 100px;
+}
+
+.header-logo {
+  position: fixed;
+  right: 10px;
+}
+
+.brand-logo {
+  width: 100%;
+}
+
+.logo-sidebar {
+  height: 110px;
+  margin: 0 auto;
+  display: block;
+}
+
+.top-m {
+  margin-top: 10px;
+}
+
+@media (max-width: 992px) {
+  .sidenav-collapse {
+    transform: translateX(0%);
+    -webkit-transition: transform 300ms linear;
+    -moz-transition: transform 300ms linear;
+    -ms-transition: transform 300ms linear;
+    -o-transition: transform 300ms linear;
+    transition: transform 300ms linear;
+  }
+
+  .button-collapse {
+    margin-left: 312px;
+    -webkit-transition: margin-left 300ms linear;
+    -moz-transition: margin-left 300ms linear;
+    -ms-transition: margin-left 300ms linear;
+    -o-transition: margin-left 300ms linear;
+    transition: margin-left 300ms linear;
+  }
+}
+</style>

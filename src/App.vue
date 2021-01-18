@@ -1,32 +1,55 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <body :class="{ 'has-fixed-sidenav': userLogged }">
+    <div id="app">
+      <span v-if="userLogged">
+        <header-admin v-if="user.role_id === 1"></header-admin>
+        <header-client v-if="user.role_id === 2"></header-client>      
+      </span>
+      <transition>       
+        <router-view></router-view>
+      </transition>        
     </div>
-    <router-view/>
-  </div>
+  </body>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import HeaderAdmin from '@/components/header/HeaderAdmin.vue'
+import HeaderClient from '@/components/header/HeaderClient.vue'
+import auth from "@/logic/auth";
+export default {
+  data () {
+    return {
+      user: {}
+    }
+  },
+  components: {
+    HeaderAdmin,
+    HeaderClient
+  },
+  computed: {
+    userLogged () {
+      return auth.getUserLogged()
+    }
+  },
+  mounted () {
+    this.user = JSON.parse(auth.getUserLogged())
+    if (this.user) {
+      if (this.$route.path == '/login' || this.$route.path == '/register') {
+        this.$router.push('/')
+      }
+    } else {
+      this.$router.push('/login')
+    }
+  }
 }
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style lang="scss" scoped>
+  @media (min-width: 993px) {
+    body.has-fixed-sidenav {
+        padding-left: 300px;
+    }
+  }
+  .v-enter-active, .fade-leave-active { transition: opacity 2.5s }
+  .v-enter, .v-leave-to{ opacity: 0 }        
 </style>
