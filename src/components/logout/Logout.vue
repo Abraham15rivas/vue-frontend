@@ -11,6 +11,7 @@
 import auth from "@/logic/auth";
 export default {
     mounted () {
+        auth.logout()
         auth.deleteUserLogged();
         auth.deleteCredential();
         window.location.href = "/login"

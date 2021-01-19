@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col m12 s12 mt">
         <h3 class="center-align" > ¡ Bienvenido al sistema de gestión de hoteles ! </h3>
-        <h6 class="center-align" > ¡ {{ JSON.parse(userLogged).email }} ! </h6>
+        <h6 class="center-align" > ¡ {{ userLogged != undefined ? JSON.parse(userLogged).email : ''}} ! </h6>
       </div>
     </div>
 

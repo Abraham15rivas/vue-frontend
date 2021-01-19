@@ -32,7 +32,7 @@ export default {
     }
   },
   mounted () {
-    this.user = JSON.parse(auth.getUserLogged())
+    this.user = auth.getUserLogged() != undefined ? JSON.parse(auth.getUserLogged()) : false
     if (this.user) {
       if (this.$route.path == '/login' || this.$route.path == '/register') {
         this.$router.push('/')
